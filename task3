@@ -1,0 +1,31 @@
+import os
+import requests
+
+def authenticate_call_api(api_url, api_key):
+    try:
+        api_key = os.getenv(api_key)
+        if not api_key:
+            print(f"Error: API key {api_key} not found in environment variables.")
+            return None
+        headers = {"Authorization": f"Bearer {api_key}"}
+        response = requests.get(api_url, headers=headers)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"Error: Failed to fetch data from {api_url}. Status code: {response.status_code}")
+            return None
+    except requests.exceptions.RequestException as e:
+        print("Error making API call:", e)
+        return None
+if __name__ == "__main__":
+    api_endpoints = {
+        "order_api": {"url": "https://developer-docs.amazon.com/sp-api/docs/orders-api-v0-reference", "key": "ORDER_API_KEY"},
+        "sales_api": {"url": "https://developer-docs.amazon.com/sp-api/docs/sales-api-v1-reference", "key": "SALES_API_KEY"}
+    }
+    for api_name, api_info in api_endpoints.items():
+        api_response = authenticate_call_api(api_info["url"], api_info["key"])
+
+        # Process the API response
+        if api_response:
+            print(f"{api_name.capitalize()} API response:", api_response)
+            # Further process the response as needed
