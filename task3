@@ -24,8 +24,6 @@ if __name__ == "__main__":
     }
     for api_name, api_info in api_endpoints.items():
         api_response = authenticate_call_api(api_info["url"], api_info["key"])
-
-        # Process the API response
         if api_response:
             print(f"{api_name.capitalize()} API response:", api_response)
             # Further process the response as needed
