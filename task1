@@ -1,3 +1,5 @@
+task1
+
 We can use Azure Cloud and its various tools and technologies to solve the problem of Amazon Seller.
 1) Extration and Storage
 Data extration simply means to extract the data from Source side and transfer it to the sink side. For that we can use various tools in azure like SSIS and 
